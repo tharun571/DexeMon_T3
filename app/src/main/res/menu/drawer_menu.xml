@@ -25,6 +25,10 @@
                 android:id="@+id/nav_pok"
 
                 android:title="Pokemons" />
+            <item
+                android:id="@+id/nav_fav"
+
+                android:title="Favourites" />
 
 
 

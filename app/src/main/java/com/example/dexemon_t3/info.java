@@ -54,7 +54,7 @@ public class info extends AppCompatActivity {
     TextView h,w;
     LoadingDialog dialog;
 
-    ImageView p,n;
+    ImageView p,n,share;
     int posit;
     String url,name1;
 
@@ -74,6 +74,7 @@ public class info extends AppCompatActivity {
         stat6=(TextView)findViewById(R.id.stat6);
         p=(ImageView)findViewById(R.id.prev);
         n=(ImageView)findViewById(R.id.next);
+        share=(ImageView)findViewById(R.id.share);
 
         dialog=new LoadingDialog(this);
 
@@ -176,6 +177,18 @@ public class info extends AppCompatActivity {
 
 
 
+            }
+        });
+
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT,"My favourite Pokemon is "+name1);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
             }
         });
 

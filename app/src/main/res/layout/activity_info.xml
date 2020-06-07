@@ -62,7 +62,19 @@
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:id="@+id/prev"/>
-             <ImageView
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/share"
+                android:layout_marginTop="16dp"
+                android:id="@+id/share"
+
+
+                />
+            <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/next"

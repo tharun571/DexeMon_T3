@@ -52,6 +52,13 @@ public class ListaPokemonAdapter extends RecyclerView.Adapter<ListaPokemonAdapte
         datasetFull=new ArrayList<>();
     }
 
+    public Pokemon getPokeat(int position){
+
+
+
+
+        return dataset.get(position);
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
