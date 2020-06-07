@@ -1,0 +1,2 @@
+rootProject.name='DexeMon_T3'
+include ':app'
