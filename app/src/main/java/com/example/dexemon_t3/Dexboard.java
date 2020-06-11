@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -22,7 +23,10 @@ import android.widget.ImageView;
 
 
 import com.example.dexemon_t3.Adapters.ListaPokemonAdapter;
+import com.example.dexemon_t3.Fragments.Favourites;
 import com.example.dexemon_t3.Fragments.common;
+import com.example.dexemon_t3.fav.favDatabase;
+import com.example.dexemon_t3.fav.favo;
 import com.example.dexemon_t3.models.Pokemon;
 import com.example.dexemon_t3.models.Pokemonreput;
 import com.example.dexemon_t3.pokeapi.PokeapiService;
@@ -55,6 +59,7 @@ public class Dexboard extends AppCompatActivity {
 
     public String info;
 
+    Context context;
 
     public static final String EXTRA_P1="POKEDEX1";
 
@@ -64,6 +69,7 @@ public class Dexboard extends AppCompatActivity {
     LoadingDialog dialog;
 
 
+    ArrayList<favo>  favs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -75,7 +81,7 @@ public class Dexboard extends AppCompatActivity {
         final MediaPlayer mp= MediaPlayer.create(this,R.raw.theme);
         mp.start();
 
-
+        context=getBaseContext();
 
 
         final ImageView toolbar1 = (ImageView) findViewById(R.id.Toolbar1);
@@ -142,6 +148,12 @@ public class Dexboard extends AppCompatActivity {
                         mp.stop();
 
 
+                    case R.id.nav_fav:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                new Favourites()).commit();
+
+
+
                 }
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
@@ -157,6 +169,8 @@ public class Dexboard extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         final GridLayoutManager layoutManager=new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerView);
+
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -195,19 +209,7 @@ public class Dexboard extends AppCompatActivity {
 
 
 
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
 
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-
-            }
-        });
 
 
     }
@@ -268,6 +270,42 @@ public String getData(){
 
         return info;
 }
+
+ItemTouchHelper.SimpleCallback simpleCallback=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
+    @Override
+    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+        return false;
+    }
+
+    @Override
+    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+        Pokemon p=listaPokemonAdapter.getposat(viewHolder.getAdapterPosition());
+
+        Log.w(TAG,"FDA "+p.getUrl());
+        Log.w(TAG,"FDA ");
+
+
+
+
+        favo fav = new favo(p.getNumber(),p.getName(),p.getUrl());
+
+
+        favDatabase dtb=favDatabase.getInstance(context);
+
+
+
+
+
+
+
+
+
+
+
+    }
+};
+
+
 
 
 }

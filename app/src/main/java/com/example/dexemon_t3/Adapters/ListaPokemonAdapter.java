@@ -4,9 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.util.Pair;
-import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +48,12 @@ public class ListaPokemonAdapter extends RecyclerView.Adapter<ListaPokemonAdapte
         this.context=context;
         dataset=new ArrayList<>();
         datasetFull=new ArrayList<>();
+    }
+
+    public Pokemon getposat(int position){
+
+        return dataset.get(position);
+
     }
 
     public Pokemon getPokeat(int position){
